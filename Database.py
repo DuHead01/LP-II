@@ -89,13 +89,32 @@ class Database:
             print(f"Usuario: '{usuario.nome}' já existe no banco de dados!")
 
     def listar_usuarios(self):
-        self.cursor.execute("select id, nome,sobrenome,email from usuarios ")
+        self.cursor.execute("select id, nome,sobrenome,email,endereco from usuarios ")
         usuarios = self.cursor.fetchall()
         print("=" * 100)
         for usuario in usuarios:
-            print(f"ID: {usuario[0]}|Nome: {usuario[1]}|Sobrenome: {usuario[2]}|Email: {usuario[3]} ")
+            print(f"ID: {usuario[0]}|Nome: {usuario[1]}|Sobrenome: {usuario[2]}|Email: {usuario[3]}|Endereço: {usuario[4]} ")
+
+    def filtrar_por_usuario(self, nome_usuario):
+        a = 0
+        self.cursor.execute("SELECT usuarios.id, usuarios.nome,usuarios.sobrenome, usuarios.email, usuarios.telefone, "
+                            "usuarios.endereco "
+                            "FROM usuarios "
+                            "WHERE usuarios.nome like %s",
+                            ("%{}%".format(nome_usuario),))
+
+        resultado_pesquisa = self.cursor.fetchall()
+        print("="*100)
+        for usuario in resultado_pesquisa:
+            a = 1
+            print(f"ID:{usuario[0]} |Nome: {usuario[1]} |Sobrenome: {usuario[2]}|Email: {usuario[3]} "
+                  f"|Telefone: {usuario[4]}|Endereço: {usuario[5]}")
+        if a == 0:
+            print("Não foi possivel encontrar esse usuario.")
 
     #Filtra por categoria e mostra em tela.
+    #teste teste teste
+
     def filtrar_por_categorias(self, categoria):
         a = 0
         self.cursor.execute("SELECT livros.id, livros.titulo, livros.categoria, livros.autor FROM livros "

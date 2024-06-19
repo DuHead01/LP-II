@@ -56,7 +56,7 @@ def main():
                            "[1] - Título \n" "[2] - Autor \n" "[3] - Categoria \n" "[0] - Não quero filtrar\n")
 
             if opcao1 == "1":
-                titulo = input("Digite o título d livro desejado: ")
+                titulo = input("Digite o título: ")
                 db.filtrar_por_titulo(titulo)
             elif opcao1 == "2":
                 autor = input("Digite o/a autor/a desejado: ")
@@ -68,7 +68,12 @@ def main():
                 db.listar_livros()
 
         elif opcao == "6":
-            db.listar_usuarios()
+            escolha = input("[1] - Usuário especifico \n[2] - listar todos\n")
+            if escolha == "1":
+                nome_usuario = input("Digite o nome do usuario: ")
+                db.filtrar_por_usuario(nome_usuario)
+            else:
+                db.listar_usuarios()
 
         elif opcao == "7":
             db.exibir_emprestados()
