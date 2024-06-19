@@ -93,7 +93,7 @@ class Database:
         usuarios = self.cursor.fetchall()
         print("=" * 100)
         for usuario in usuarios:
-            print(f"ID: {usuario[0]}|Nome: {usuario[1]}|Sobrenome: {usuario[2]}|Email: {usuario[3]}|Endereço: {usuario[4]} ")
+            print(f"ID: {usuario[0]}|Nome: {usuario[1]} {usuario[2]}|Email: {usuario[3]}|Endereço: {usuario[4]} ")
 
     def filtrar_por_usuario(self, nome_usuario):
         a = 0
@@ -107,7 +107,7 @@ class Database:
         print("="*100)
         for usuario in resultado_pesquisa:
             a = 1
-            print(f"ID:{usuario[0]} |Nome: {usuario[1]} |Sobrenome: {usuario[2]}|Email: {usuario[3]} "
+            print(f"ID:{usuario[0]} |Nome: {usuario[1]} {usuario[2]}|Email: {usuario[3]} "
                   f"|Telefone: {usuario[4]}|Endereço: {usuario[5]}")
         if a == 0:
             print("Não foi possivel encontrar esse usuario.")
@@ -191,7 +191,7 @@ class Database:
         print("=" *100)
         for resultado in resultados:
             a = 1
-            print(f"ID:{resultado[0]}")
+            print(f"ID do livro:{resultado[0]}")
             print(f"Nome: {resultado[2]} {resultado[3]}")
             print(f"Livro: {resultado[1]}")
             print(f"Data do empréstimo: {resultado[4]}")

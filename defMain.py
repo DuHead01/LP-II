@@ -39,14 +39,30 @@ def main():
             db.add_livro(novo_livro)
 
         elif opcao == "3":
+            perguta = input("Checar ID do livro? [y] ou [n]")
+            resposta = perguta.lower()
+            if resposta == "y":
+                titulo = input("Digite o título: ")
+                db.filtrar_por_titulo(titulo)
             id_livro = input("Insira o ID do livro: \n")
-            id_usuario = input("ID do usuário: \n")
-            data_emprestimo = input("Data do emprestimo: ex:17-06-2024 \n")
+            pergunta2 = input("Checar o ID do usuario?[y] ou [n]")
+            resposta1 = pergunta2.lower()
+            if resposta1 == "y":
+                nome_usuario = input("Digite o nome do usuario: ")
+                db.filtrar_por_usuario(nome_usuario)
+            id_usuario = input("ID do usuário: ")
+            print("Exemplo data: 17-06-2024")
+            data_emprestimo = input("Data do emprestimo: ")
             data_devulucao = estimar_data_devolucao(data_emprestimo)
             print(f"O livro deve ser devolvido até 30 dias -> {data_devulucao}")
             db.emprestar_livro(id_livro, id_usuario, data_emprestimo, None)
 
         elif opcao == "4":
+            perguta = input("Checar ID do livro? [y] ou [n]")
+            resposta = perguta.lower()
+            if resposta == "y":
+                titulo = input("Digite o título: ")
+                db.filtrar_por_titulo(titulo)
             id_livro = int(input("Digite o ID do livro que está sendo devolvido: "))
             data_devolucao = input("Digite a data da devolução: ")
             db.inserir_data_devolucao(id_livro, data_devolucao)
