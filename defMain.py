@@ -11,14 +11,14 @@ def main():
 
     while True:
         print("="*100)
-        print("1. Adicionar usuário")
-        print("2. Adicionar novo livro")
-        print("3. Realizar empréstimo")
-        print("4. Inserir devolução")
-        print("5. Mostrar livros")
-        print("6. Mostrar usuários")
-        print("7. Ver livros emprestados")
-        print("0. Sair")
+        print("[1] Adicionar usuário")
+        print("[2] Adicionar novo livro")
+        print("[3] Realizar empréstimo")
+        print("[4] Inserir devolução")
+        print("[5] Mostrar livros")
+        print("[6] Mostrar usuários")
+        print("[7] Ver livros emprestados")
+        print("[0] Sair")
 
         opcao = input("\nDigite a opção desejada: ")
         if opcao == "1":
@@ -53,7 +53,7 @@ def main():
 
         elif opcao == "5":
             opcao1 = input("Você deseja filtrar de alguma forma sua pesquisa?\n"
-                           "[1] - Título / [2] - Autor / [3] - Categoria / [0] - Não quero filtrar \n")
+                           "[1] - Título \n" "[2] - Autor \n" "[3] - Categoria \n" "[0] - Não quero filtrar\n")
 
             if opcao1 == "1":
                 titulo = input("Digite o título d livro desejado: ")
