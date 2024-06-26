@@ -49,12 +49,14 @@ class Database:
 
     #Adiciona livro ao banco de dados, pedindo, nessa ordem, Titulo,Autor e Editora
     def add_livro(self, Livro):
-        self.cursor.execute("""SELECT COUNT(*) FROM livros WHERE titulo = %s AND autor = %s AND editora = %s AND categoria = %s""",
+        self.cursor.execute("""SELECT COUNT(*) FROM livros 
+        WHERE titulo = %s AND autor = %s AND editora = %s AND categoria = %s""",
                             (Livro.titulo, Livro.autor, Livro.editora, Livro.categoria))
         count = self.cursor.fetchone()[0]
 
         if count == 0:
-            self.cursor.execute("""INSERT INTO livros (titulo, autor, editora,categoria) VALUES (%s, %s, %s, %s)""",
+            self.cursor.execute("""INSERT INTO livros (titulo, autor, editora,categoria) 
+            VALUES (%s, %s, %s, %s)""",
                                 (Livro.titulo, Livro.autor, Livro.editora, Livro.categoria))
             self.connection.commit()
             print(f"Livro '{Livro.titulo}' adicionado com sucesso!")
@@ -88,6 +90,7 @@ class Database:
         else:
             print(f"Usuario: '{usuario.nome}' já existe no banco de dados!")
 
+    # Lista os livros existentes no banco de dados
     def listar_usuarios(self):
         self.cursor.execute("select id, nome,sobrenome,email,endereco from usuarios ")
         usuarios = self.cursor.fetchall()
@@ -95,6 +98,7 @@ class Database:
         for usuario in usuarios:
             print(f"ID: {usuario[0]}|Nome: {usuario[1]} {usuario[2]}|Email: {usuario[3]}|Endereço: {usuario[4]} ")
 
+    # filtra os usuarios mostrados dependendo da escolha do utilizador
     def filtrar_por_usuario(self, nome_usuario):
         a = 0
         self.cursor.execute("SELECT usuarios.id, usuarios.nome,usuarios.sobrenome, usuarios.email, usuarios.telefone, "
@@ -112,8 +116,7 @@ class Database:
         if a == 0:
             print("Não foi possivel encontrar esse usuario.")
 
-    #Filtra por categoria e mostra em tela.
-    #teste teste teste
+    # Filtra por categoria e mostra em tela.
 
     def filtrar_por_categorias(self, categoria):
         a = 0
@@ -128,6 +131,7 @@ class Database:
         if a == 0:
             print("Não foi possivel encontrar essa categoria.")
 
+    # Filtra por autor e mostra em tela.
     def filtrar_por_autor(self, autor):
         a = 0
         self.cursor.execute("SELECT livros.id, livros.titulo,livros.autor, livros.categoria FROM livros "
@@ -141,6 +145,7 @@ class Database:
         if a == 0:
             print("Não foi possivel encontrar essa autor.")
 
+    # Filtra por titulo e mostra em tela.
     def filtrar_por_titulo(self, titulo):
         a = 0
         self.cursor.execute("SELECT livros.id, livros.titulo,livros.autor, livros.categoria FROM livros "
@@ -154,6 +159,8 @@ class Database:
         if a == 0:
             print("Não foi possivel encontrar essa titulo.")
 
+
+    # Lista os livros existentes no banco de dados
     def listar_livros(self):
         self.cursor.execute("select livros.id, livros.titulo, livros.autor, livros.categoria from livros")
         resultado_pesquisa = self.cursor.fetchall()
@@ -162,6 +169,9 @@ class Database:
             print(f"ID: {livros[0]} |Titulo: {livros[1]} |Autor: {livros[2]} | Categoria: {livros[3]}")
             print("=" * 100)
 
+
+    # Realiza o emprestimo de um livro, o tornando inapto para ser emprestado novamente
+    # enquanto não for devolvido
     def emprestar_livro(self, id_livro, id_usuario, data_emprestimo, data_devolucao):
         self.cursor.execute("SELECT COUNT(*) FROM emprestimos WHERE id_livro = %s AND data_devolucao IS NULL",
                             (id_livro,))
@@ -202,6 +212,9 @@ class Database:
         if a == 0:
             print("Nenhum empréstimo realizado ainda.")
 
+
+    # Realiza a devolução na data que a pessoa que pegou o livro
+    # vier o devolver
     def inserir_data_devolucao(self, id_livro, data_devolucao):
         self.cursor.execute("""UPDATE emprestimos SET data_devolucao = %s WHERE id_livro = %s"""
                             , (data_devolucao, id_livro))
