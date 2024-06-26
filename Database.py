@@ -190,6 +190,8 @@ class Database:
                   f"emprestado novamente até que seja devolvido.")
         self.connection.commit()
 
+    # Mostra em tela os livros emprestados no momento caso existam emprestados
+
     def exibir_emprestados(self):
         a = 0
         self.cursor.execute("SELECT livros.id, livros.titulo, usuarios.nome, usuarios.sobrenome, emprestimos.data_emprestimo, "
@@ -206,11 +208,11 @@ class Database:
             print(f"Livro: {resultado[1]}")
             print(f"Data do empréstimo: {resultado[4]}")
             if resultado[5] is None:
-                print("Ainda não devolvido.")
+                print("Ainda não devolvido. \n")
             else:
                 print("Devolvido.")
         if a == 0:
-            print("Nenhum empréstimo realizado ainda.")
+            print("Nenhum empréstimo realizado ainda. \n")
 
 
     # Realiza a devolução na data que a pessoa que pegou o livro

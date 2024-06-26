@@ -2,5 +2,8 @@ from defMain import main
 
 main()
 
-#teste
+# Bianca Luchesi
+# Eduardo Soares
+# Gabriel Alexandro
+# Matheus Medeiros
 
